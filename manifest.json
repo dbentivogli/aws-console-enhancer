@@ -1,0 +1,30 @@
+{
+    "name": "AWS Console Enhancer",
+    "description": "Extract infos from page and cookies and keep them always visible.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "host_permissions": [
+        "https://console.aws.amazon.com/*",
+        "https://*.console.aws.amazon.com/*",
+        "https://*.amazon.com/*"
+    ],
+    "permissions": [
+        "storage",
+        "cookies"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://console.aws.amazon.com/*",
+                "https://*.console.aws.amazon.com/*"
+            ],
+            "css": [],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
