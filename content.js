@@ -15,7 +15,12 @@
 
 
     chrome.runtime.sendMessage({ method: "getUserData" }, function (response) {
-        console.log(response);
+        const menuItem = document.querySelector("button#nav-usernameMenu span[data-testid=awsc-nav-account-menu-button]");
+        //console.log(response);
+        //console.log(menuItem);
+        menuItem.textContent = `${response.username} @ ${response.accountAlias}`;
     });
+
+    
 
 })();
