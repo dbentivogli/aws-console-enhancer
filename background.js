@@ -1,3 +1,11 @@
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.method !== 'getUserData') return;
+    getUserData().then(data => sendResponse(data));
+    return true;
+});
+
+
 async function getUserData() {
     var cookies = await chrome.cookies.getAll({});
 
@@ -13,15 +21,24 @@ async function getUserData() {
         username,
         role
     };
-
 }
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.method !== 'getUserData') return;
-    console.log('ricevuto');
-    getUserData().then(data => {
-        console.log(data)
-        sendResponse(data);
+async function isUserLoggedIn(){
+    let auth = chrome.storage.sync.get(['googAuthToken'], (value)=>{
+        console.log(value);
+    });
+}
+
+async function getAuthToken (){
+    // await chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+    //     console.log('TOKEN', token  )
+    // });
+    return new Promise(resolve => {
+        chrome.storage.sync.set({googAuthToken: 'ciao'}, (data)=> {
+            console.log('data stored', data);
+            resolve(data);
+        });
     })
-    return true;
-});
+}
+
+getAuthToken().then(isUserLoggedIn())

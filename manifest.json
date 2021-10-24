@@ -10,10 +10,20 @@
     ],
     "permissions": [
         "storage",
-        "cookies"
+        "cookies",
+        "identity"
     ],
+    "oauth2": {
+        "client_id": "861488720452-gu0cf71135pjk5320vas8d7dt9ror55u.apps.googleusercontent.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/spreadsheets.readonly"
+        ]
+    },
     "background": {
         "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup/index.html"
     },
     "content_scripts": [
         {
@@ -28,3 +38,5 @@
         }
     ]
 }
+
+
